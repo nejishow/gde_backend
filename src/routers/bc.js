@@ -29,8 +29,19 @@ router.get('/bon/:id', async (req, res) => {
 
 router.get('/bons/:date', async (req, res) => {
     try {
-        console.log(req.params.date);
         const bons = await BC.find({Exercice:req.params.date})
+        if (!bons) {
+            return res.status(200).send([])
+        }
+        return res.status(201).send(bons)
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
+router.get('/bons', async (req, res) => {
+    try {
+        const bons = await BC.find({})
         if (!bons) {
             return res.status(200).send([])
         }

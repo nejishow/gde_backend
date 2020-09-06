@@ -3,6 +3,12 @@ require('./db/mongoose')
 const cors = require("cors")
 const path = require("path")
 const bon_commandes = require("./routers/bc")
+const fournisseur = require("./routers/fournisseur")
+const rubrique = require("./routers/rubrique")
+const budget = require("./routers/budget")
+const service = require("./routers/service")
+const mandats = require("./routers/mandats")
+const compte_budgetaire = require("./routers/compte_budgetaires")
 const cluster = require ('cluster')
 
 let workers = [];
@@ -21,6 +27,12 @@ const imagesPath = path.join(__dirname, '../images')
 app.use('/images', express.static(imagesPath))
 app.use(express.json())
 app.use(bon_commandes)
+app.use(mandats)
+app.use(fournisseur)
+app.use(service)
+app.use(rubrique)
+app.use(budget)
+app.use(compte_budgetaire)
 
 
 const setupWorkerProcesses = () => {
